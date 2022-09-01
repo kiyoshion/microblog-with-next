@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Layout from "../../components/Layout";
 import { getAllPostIds, getPostData } from "../../lib/post";
 import utilSytles from '../../styles/utils.module.css'
@@ -25,6 +26,9 @@ export async function getStaticProps({ params }) {
 export default function Post({ postData }) {
   return (
     <Layout>
+      <Head>
+        <title>{postData.title}</title>
+      </Head>
       <article>
         <h1 className={utilSytles.headingMd}>{postData.title}</h1>
         <div className={utilSytles.lightText}>{postData.date}</div>
