@@ -2,10 +2,32 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import Layout from '../components/Layout'
+import { getPostsData } from '../lib/post'
 import styles from '../styles/Home.module.css'
 import utilStyles from '../styles/utils.module.css'
 
-export default function Home() {
+// SSG
+export async function getStaticProps() {
+  const allPostsData = getPostsData();
+  console.log(allPostsData);
+
+  return {
+    props: {
+      allPostsData,
+    }
+  }
+}
+
+// SSR
+// export async function getServerSideProps(context) {
+//   return {
+//     props: {
+
+//     }
+//   }
+// }
+
+export default function Home({ allPostsData }) {
   return (
     <Layout>
       <section className={utilStyles.headingMd}>
@@ -15,34 +37,22 @@ export default function Home() {
       <section>
         <h2>エンジニアブログ</h2>
         <div className={styles.grid}>
-          <article>
-            <Link href="/">
-              <img
-                alt="post1"
-                src="/img/thumbnail01.jpg"
-                className={styles.thumbnailImage}
-              />
-            </Link>
-            <Link href="/">
-              <a className={utilStyles.boldText}>記事1</a>
-            </Link>
-            <br />
-            <small className={utilStyles.lightText}>2022</small>
-          </article>
-          <article>
-            <Link href="/">
-              <img
-                alt="post2"
-                src="/img/thumbnail02.jpg"
-                className={styles.thumbnailImage}
-              />
-            </Link>
-            <Link href="/">
-              <a className={utilStyles.boldText}>記事1</a>
-            </Link>
-            <br />
-            <small className={utilStyles.lightText}>2022</small>
-          </article>
+          {allPostsData.map(({ id, title, date, thumbnail }) => (
+            <article key={id}>
+              <Link href={`/posts/${id}`}>
+                <img
+                  alt={title}
+                  src={`${thumbnail}`}
+                  className={styles.thumbnailImage}
+                  />
+              </Link>
+              <Link href={`/posts/${id}`}>
+                <a className={utilStyles.boldText}>{title}</a>
+              </Link>
+              <br />
+              <small className={utilStyles.lightText}>{date}</small>
+            </article>
+          ))}
         </div>
       </section>
     </Layout>

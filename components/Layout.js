@@ -1,6 +1,7 @@
 import Head from "next/head";
 import styles from "./layout.module.css";
 import utilStyles from "../styles/utils.module.css";
+import Link from "next/link";
 
 const name ="高浜きょんし";
 export const siteTitle = "Microblog with Nextjs";
@@ -13,11 +14,14 @@ function Layout({ children }) {
       </Head>
       <header className={styles.header}>
         <img
-          src="/img/profile.jpg"
+          src="/img/img.jpg"
           className={utilStyles.borderCircle}
+          width="80"
         />
-        <h1 className={utilStyles.headingLg}>{name}</h1>
-      </header>
+        <Link href="/">
+          <h1 className={utilStyles.headingLg}>{name}</h1>
+        </Link>
+    </header>
       <main>{children}</main>
     </div>
   );
