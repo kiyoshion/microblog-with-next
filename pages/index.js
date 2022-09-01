@@ -34,7 +34,7 @@ export default function Home({ allPostsData }) {
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>I'm a freelance engineer.</p>
+        <p>I&apos;m a freelance engineer.</p>
       </section>
 
       <section>
