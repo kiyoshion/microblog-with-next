@@ -18,6 +18,7 @@ export default function Home() {
           <article>
             <Link href="/">
               <img
+                alt="post1"
                 src="/img/thumbnail01.jpg"
                 className={styles.thumbnailImage}
               />
@@ -31,7 +32,8 @@ export default function Home() {
           <article>
             <Link href="/">
               <img
-                src="/img/thumbnail01.jpg"
+                alt="post2"
+                src="/img/thumbnail02.jpg"
                 className={styles.thumbnailImage}
               />
             </Link>
